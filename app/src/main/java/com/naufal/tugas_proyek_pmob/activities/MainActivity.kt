@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.naufal.tugas_proyek_pmob.R
-import kotlin.math.PI
 
 class MainActivity : AppCompatActivity() {
 
