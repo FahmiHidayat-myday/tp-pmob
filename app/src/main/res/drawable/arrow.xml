@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Background kotak dengan sudut tumpul -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M2,2a2,2 0 0 1 2,-2h16a2,2 0 0 1 2,2v20a2,2 0 0 1 -2,2h-16a2,2 0 0 1 -2,-2z" />
+
+    <!-- Panah putih dipusatkan dan diperkecil -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M9,16l1.41,1.41L15.83,12l-5.42,-5.41L9,8l4,4z"/>
+</vector>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/job4all"
+        android:contentDescription="Logo"
+        android:layout_marginBottom="32dp"/>
+
+
+    <EditText
+        android:id="@+id/registerUsernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:padding="12dp"
+        android:background="@color/white"
+        android:layout_marginBottom="16dp"/>
+
+
+    <EditText
+        android:id="@+id/registerBirthDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tanggal Lahir"
+        android:focusable="false"
+        android:clickable="true"
+        android:padding="12dp"
+        android:background="@color/white"
+        android:layout_marginBottom="16dp"/>
+
+
+
+
+    <EditText
+        android:id="@+id/registerPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:padding="12dp"
+        android:background="@color/white"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"/>
+
+
+    <EditText
+        android:id="@+id/registerConfirmPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:padding="12dp"
+        android:background="@color/white"
+        android:layout_marginBottom="24dp"
+        android:inputType="textPassword"/>
+
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:backgroundTint="#3F51B5"
+        android:textColor="#FFFFFF"/>
+
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kembali"
+        android:backgroundTint="#9E9E9E"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp"/>
+
+
+
+</LinearLayout>
