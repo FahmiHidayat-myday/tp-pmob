@@ -1,6 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -15,36 +23,48 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="string/google_map_api_key"/>
+            android:value="AIzaSyDMlapKbDd97Ryh7wshr6WppjFeabp__cA" />
 
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
+        <!-- ================= AWAL PERBAIKAN ================= -->
 
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
-
-        <activity
-            android:name=".activities.MapActivity"
-            android:exported="false"
-            android:label="@string/title_activity_map" />
+        <!-- 1. Deklarasi MainActivity sebagai LAUNCHER (pintu masuk aplikasi) -->
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 2. Deklarasikan semua Activity lain yang Anda miliki -->
+        <activity
+            android:name=".activities.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProfileMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DetailLowonganActivity"
+            android:exported="false"
+            android:label="Detail Lowongan" />
+        <activity
+            android:name=".activities.DaftarPekerjaanActivity"
+            android:exported="false"
+            android:label="Daftar Pekerjaan" />
+        <activity
+            android:name=".activities.LowonganActivity"
+            android:exported="false"
+            android:label="Lowongan"/>
+        <!-- AndroidManifest.xml -->
+        <activity
+            android:name=".activities.NotifikasiActivity"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>
