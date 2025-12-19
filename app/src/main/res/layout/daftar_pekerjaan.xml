@@ -203,7 +203,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Tombol Kirim Lamaran -->
+
     <Button
         android:id="@+id/btnKirimLamaran"
         android:layout_width="0dp"

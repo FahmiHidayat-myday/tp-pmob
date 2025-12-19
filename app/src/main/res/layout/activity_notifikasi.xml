@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Daftar Lowongan"
+            android:text="Notifikasi"
             android:textStyle="bold"
             android:textSize="22sp"
             android:textColor="#0D1A33"
@@ -41,60 +41,41 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp" />
 
-        <!-- Spacer untuk menyeimbangkan judul di tengah -->
+        <!-- Spacer untuk menyeimbangkan judul -->
         <View
             android:layout_width="24dp"
             android:layout_height="24dp"/>
     </LinearLayout>
 
-    <!-- ================= AWAL PERUBAHAN UTAMA ================= -->
-
-    <!-- Search Bar yang lebih modern menggunakan SearchView -->
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        app:iconifiedByDefault="false"
-        app:queryHint="Cari lowongan yang sesuai..."
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- RecyclerView untuk menampilkan daftar lowongan -->
-    <!-- Ganti dengan layout item Anda -->
-
-    <!-- Tampilan untuk Keadaan Kosong (Empty State) -->
+    <!-- RecyclerView untuk menampilkan daftar notifikasi -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewLowongan"
+        android:id="@+id/recyclerViewNotifikasi"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:clipToPadding="false"
+        android:layout_marginTop="8dp"
         android:paddingHorizontal="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/item_lowongan" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_notifikasi"/>
 
+    <!-- Tampilan untuk Keadaan Kosong (Empty State) -->
     <TextView
         android:id="@+id/tvEmptyState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tidak ada lowongan ditemukan"
+        android:text="Belum ada notifikasi"
         android:textSize="16sp"
         android:textColor="#777777"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@+id/recyclerViewLowongan"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewLowongan"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewNotifikasi"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewNotifikasi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible"/>
-
-    <!-- ================= AKHIR PERUBAHAN UTAMA ================= -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

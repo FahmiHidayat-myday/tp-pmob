@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- res/values/colors.xml --><color name="status_diterima">#4CAF50</color>
+    <color name="status_ditolak">#F44336</color>
+    <color name="status_diproses">#2196F3</color>
+    <color name="status_dilihat">#757575</color>
+
 </resources>

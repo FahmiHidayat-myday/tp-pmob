@@ -38,12 +38,6 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/btnEdit"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Tombol Edit"
-                android:src="@drawable/baseline_edit_24" />
         </LinearLayout>
 
 
@@ -242,7 +236,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/background_logout_button"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
