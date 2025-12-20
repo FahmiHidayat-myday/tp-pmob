@@ -32,8 +32,11 @@ class LowonganAdapter(private var lowonganList: List<Lowongan>) :
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailLowonganActivity::class.java).apply {
-                // Kirim data ke DetailLowonganActivity (opsional)
-                putExtra("ID_LOWONGAN", lowongan.id)
+                putExtra("EXTRA_JOB_TITLE", lowongan.judul)
+                putExtra("EXTRA_COMPANY_NAME", lowongan.namaPerusahaan)
+                putExtra("EXTRA_DESCRIPTION", lowongan.deskripsi)
+                putExtra("EXTRA_LATITUDE", lowongan.latitude)
+                putExtra("EXTRA_LONGITUDE", lowongan.longitude)
             }
             context.startActivity(intent)
         }

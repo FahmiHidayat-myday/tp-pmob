@@ -49,10 +49,10 @@
 
 
     <Button
-        android:id="@+id/registerTextView"
+        android:id="@+id/tv_to_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Register here"
+        android:text="Belum punya akun? Register sini"
         android:textColor="#FFFFFF"
         android:backgroundTint="#3F51B5"
         android:layout_marginTop="16dp"

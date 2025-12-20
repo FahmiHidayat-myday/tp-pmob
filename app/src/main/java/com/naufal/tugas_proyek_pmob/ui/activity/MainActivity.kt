@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.naufal.tugas_proyek_pmob.R
 
 class MainActivity : AppCompatActivity() {
@@ -13,15 +14,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_main)
 
         supportActionBar?.hide()
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, HomeActivity::class.java)
+            // Selalu arahkan ke LoginActivity setelah splash screen
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-
+            // Tutup MainActivity agar tidak bisa kembali ke splash screen
             finish()
         }, DURASI_SPLASH)
     }

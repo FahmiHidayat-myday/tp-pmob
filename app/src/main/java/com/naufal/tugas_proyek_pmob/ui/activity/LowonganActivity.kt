@@ -23,9 +23,7 @@ class LowonganActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
-
         loadDummyData()
-
         setupListeners()
     }
 
@@ -38,13 +36,9 @@ class LowonganActivity : AppCompatActivity() {
     }
 
     private fun loadDummyData() {
-        allLowonganList.add(Lowongan("1", "UI/UX Designer", "Gojek", "Jakarta, Indonesia", R.drawable.logo_job))
-        allLowonganList.add(Lowongan("2", "Android Developer", "Tokopedia", "Jakarta, Indonesia", R.drawable.logo_job))
-        allLowonganList.add(Lowongan("3", "Web Developer", "Traveloka", "Surabaya, Indonesia", R.drawable.logo_job))
-        allLowonganList.add(Lowongan("4", "Product Manager", "Bukalapak", "Bandung, Indonesia", R.drawable.logo_job))
-        allLowonganList.add(Lowongan("5", "Data Scientist", "Shopee", "Yogyakarta, Indonesia", R.drawable.logo_job))
-        allLowonganList.add(Lowongan("6", "Quality Assurance", "Gojek", "Surabaya, Indonesia", R.drawable.logo_job))
-        allLowonganList.add(Lowongan("7", "iOS Developer", "Blibli", "Jakarta, Indonesia", R.drawable.logo_job))
+        // Data contoh
+        allLowonganList.add(Lowongan("1", "UI/UX Designer", "Gojek", "Jakarta, Indonesia", R.drawable.logo_job, "Deskripsi lengkap Gojek...", -6.2088, 106.8456))
+        allLowonganList.add(Lowongan("2", "Android Developer", "Tokopedia", "Jakarta, Indonesia", R.drawable.logo_job, "Deskripsi lengkap Tokopedia...", -6.1751, 106.8650))
 
         lowonganAdapter.filterList(allLowonganList)
     }

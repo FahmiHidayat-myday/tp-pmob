@@ -60,7 +60,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="169dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="16dp">
@@ -73,33 +73,49 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="151dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
+                        <!-- TextView untuk Nama Perusahaan -->
                         <TextView
                             android:id="@+id/tvCompanyName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nama Perusahaan"
+                            tools:text="Nama Perusahaan"
                             android:textColor="#FF7C00"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
+                        <!-- ================= AWAL PERBAIKAN ================= -->
+
+                        <!-- TextView BARU untuk Judul Pekerjaan -->
                         <TextView
                             android:id="@+id/tvJobTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Deskripsi Pekerjaan"
-                            android:textSize="13sp" />
+                            android:layout_marginTop="4dp"
+                            android:textColor="#0D1A33"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="UI/UX Designer" />
+
+                        <!-- TextView yang ID-nya diubah untuk Deskripsi -->
+                        <TextView
+                            android:id="@+id/tvJobDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textSize="14sp"
+                            tools:text="Mendesain antarmuka yang ramah pengguna untuk berbagai produk digital perusahaan." />
+
+                        <!-- ================= AKHIR PERBAIKAN ================= -->
 
                     </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-            <!-- ================= AWAL PERUBAHAN ================= -->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLocation"
@@ -141,8 +157,6 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <!-- ================= AKHIR PERUBAHAN ================= -->
 
         </LinearLayout>
     </ScrollView>

@@ -47,9 +47,7 @@
             android:layout_height="24dp"/>
     </LinearLayout>
 
-    <!-- ================= AWAL PERUBAHAN UTAMA ================= -->
-
-    <!-- Search Bar yang lebih modern menggunakan SearchView -->
+    <!-- Search Bar dengan Tema yang Didefinisikan -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
@@ -58,14 +56,11 @@
         android:layout_marginTop="8dp"
         app:iconifiedByDefault="false"
         app:queryHint="Cari lowongan yang sesuai..."
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- RecyclerView untuk menampilkan daftar lowongan -->
-    <!-- Ganti dengan layout item Anda -->
-
-    <!-- Tampilan untuk Keadaan Kosong (Empty State) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLowongan"
         android:layout_width="0dp"
@@ -94,7 +89,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible"/>
-
-    <!-- ================= AKHIR PERUBAHAN UTAMA ================= -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

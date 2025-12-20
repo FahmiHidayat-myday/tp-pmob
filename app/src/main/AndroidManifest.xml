@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 
     <application
         android:allowBackup="true"
@@ -20,16 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tugas_Proyek_Pmob">
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDMlapKbDd97Ryh7wshr6WppjFeabp__cA" />
 
-        <!-- ================= AWAL PERBAIKAN ================= -->
-
-        <!-- 1. Deklarasi MainActivity sebagai LAUNCHER (pintu masuk aplikasi) -->
+        <!-- MainActivity (Splash Screen) sebagai LAUNCHER -->
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,33 +31,39 @@
             </intent-filter>
         </activity>
 
-        <!-- 2. Deklarasikan semua Activity lain yang Anda miliki -->
+        <!-- Deklarasi untuk Login dan Register -->
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ProfileActivity"
+            android:name=".ui.activity.RegisterActivity"
+            android:exported="false" />
+
+        <!-- Activity Lainnya -->
+        <activity
+            android:name=".ui.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ProfileMenuActivity"
+            android:name=".ui.activity.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DetailLowonganActivity"
+            android:name=".ui.activity.ProfileMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.DetailLowonganActivity"
             android:exported="false"
             android:label="Detail Lowongan" />
         <activity
-            android:name=".activities.DaftarPekerjaanActivity"
+            android:name=".ui.activity.DaftarPekerjaanActivity"
             android:exported="false"
             android:label="Daftar Pekerjaan" />
         <activity
-            android:name=".activities.LowonganActivity"
+            android:name=".ui.activity.LowonganActivity"
             android:exported="false"
             android:label="Lowongan"/>
-        <!-- AndroidManifest.xml -->
         <activity
-            android:name=".activities.NotifikasiActivity"
+            android:name=".ui.activity.NotifikasiActivity"
             android:exported="false" />
-
 
     </application>
 
