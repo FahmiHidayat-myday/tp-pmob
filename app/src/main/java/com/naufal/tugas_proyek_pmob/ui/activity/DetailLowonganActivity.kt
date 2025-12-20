@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.model.LatLng
-import com.naufal.tugas_proyek_pmob.activities.DaftarPekerjaanActivity
 import com.naufal.tugas_proyek_pmob.databinding.ActivityDetailLowonganBinding
 
 class DetailLowonganActivity : AppCompatActivity() {
