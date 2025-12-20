@@ -33,6 +33,7 @@
                 android:padding="16dp">
 
                 <ImageView
+                    android:id="@+id/btnBack"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:contentDescription="Back"
@@ -59,7 +60,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="169dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="16dp">
@@ -72,30 +73,49 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="151dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
+                        <!-- TextView untuk Nama Perusahaan -->
                         <TextView
+                            android:id="@+id/tvCompanyName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nama Perusahaan"
+                            tools:text="Nama Perusahaan"
                             android:textColor="#FF7C00"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
+                        <!-- ================= AWAL PERBAIKAN ================= -->
+
+                        <!-- TextView BARU untuk Judul Pekerjaan -->
                         <TextView
+                            android:id="@+id/tvJobTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Deskripsi Pekerjaan"
-                            android:textSize="13sp" />
+                            android:layout_marginTop="4dp"
+                            android:textColor="#0D1A33"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="UI/UX Designer" />
+
+                        <!-- TextView yang ID-nya diubah untuk Deskripsi -->
+                        <TextView
+                            android:id="@+id/tvJobDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textSize="14sp"
+                            tools:text="Mendesain antarmuka yang ramah pengguna untuk berbagai produk digital perusahaan." />
+
+                        <!-- ================= AKHIR PERBAIKAN ================= -->
 
                     </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLocation"
@@ -109,26 +129,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="16dp"
-                        android:paddingEnd="16dp"
                         android:text="Lokasi Pekerjaan"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <androidx.fragment.app.FragmentContainerView
-                        android:id="@+id/mapFragment"
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
-                        class="com.google.android.gms.maps.SupportMapFragment"
+                    <!-- Tombol untuk membuka Google Maps -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBukaPeta"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:layout_marginTop="8dp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Lihat di Google Maps"
+                        android:textColor="@android:color/white"
+                        app:backgroundTint="#4285F4"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/baseline_location_on_24"
+                        app:iconGravity="textStart"
+                        app:iconTint="@android:color/white"/>
 
                 </LinearLayout>
 
