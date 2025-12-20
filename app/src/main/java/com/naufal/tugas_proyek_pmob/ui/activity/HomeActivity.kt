@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.naufal.tugas_proyek_pmob.databinding.ActivityHomeBinding
+import com.naufal.tugas_proyek_pmob.ui.activity.DetailLowonganActivity
 import com.naufal.tugas_proyek_pmob.ui.activity.LowonganActivity
 import com.naufal.tugas_proyek_pmob.ui.activity.NotifikasiActivity
 import com.naufal.tugas_proyek_pmob.ui.activity.ProfileMenuActivity
@@ -28,10 +29,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.cardLowongan.setOnClickListener {
-
             val intent = Intent(this, LowonganActivity::class.java)
             startActivity(intent)
-
         }
 
         binding.cardNotifikasi.setOnClickListener {
