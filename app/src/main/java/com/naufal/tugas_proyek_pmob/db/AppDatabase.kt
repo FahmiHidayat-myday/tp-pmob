@@ -1,4 +1,4 @@
-package com.naufal.tugas_proyek_pmob.activities
+package com.naufal.tugas_proyek_pmob.db
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

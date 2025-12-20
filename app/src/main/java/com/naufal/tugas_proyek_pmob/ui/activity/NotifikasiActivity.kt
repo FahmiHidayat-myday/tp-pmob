@@ -1,4 +1,4 @@
-package com.naufal.tugas_proyek_pmob.activities
+package com.naufal.tugas_proyek_pmob.ui.activity
 
 import android.os.Bundle
 import android.view.View
@@ -36,7 +36,6 @@ class NotifikasiActivity : AppCompatActivity() {
     }
 
     private fun loadDummyData() {
-        // Ini adalah data contoh, nantinya bisa Anda ambil dari API atau database
         allNotifikasiList.add(Notifikasi("1", "UI/UX Designer", "Tokopedia", StatusLamaran.DITERIMA, "1 hari yang lalu"))
         allNotifikasiList.add(Notifikasi("2", "Android Developer", "Gojek", StatusLamaran.DIPROSES, "3 hari yang lalu"))
         allNotifikasiList.add(Notifikasi("3", "Web Developer", "Traveloka", StatusLamaran.DILIHAT, "5 hari yang lalu"))

@@ -1,12 +1,12 @@
-package com.naufal.tugas_proyek_pmob.adapters // Buat package 'adapters' jika belum ada
+package com.naufal.tugas_proyek_pmob.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.naufal.tugas_proyek_pmob.activities.DetailLowonganActivity
 import com.naufal.tugas_proyek_pmob.databinding.ItemLowonganBinding
 import com.naufal.tugas_proyek_pmob.models.Lowongan
+import com.naufal.tugas_proyek_pmob.ui.activity.DetailLowonganActivity
 
 class LowonganAdapter(private var lowonganList: List<Lowongan>) :
     RecyclerView.Adapter<LowonganAdapter.LowonganViewHolder>() {

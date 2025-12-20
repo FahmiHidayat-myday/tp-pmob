@@ -1,4 +1,4 @@
-package com.naufal.tugas_proyek_pmob.adapters // PERBAIKAN: Seharusnya di package 'adapters'
+package com.naufal.tugas_proyek_pmob.adapters
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -10,8 +10,6 @@ import com.naufal.tugas_proyek_pmob.R
 import com.naufal.tugas_proyek_pmob.databinding.ItemNotifikasiBinding
 import com.naufal.tugas_proyek_pmob.models.Notifikasi
 import com.naufal.tugas_proyek_pmob.models.StatusLamaran
-
-// PERBAIKAN: Baris 'import androidx.compose...' sudah dihapus
 
 class NotifikasiAdapter(private val notifikasiList: List<Notifikasi>) :
     RecyclerView.Adapter<NotifikasiAdapter.NotifikasiViewHolder>() {

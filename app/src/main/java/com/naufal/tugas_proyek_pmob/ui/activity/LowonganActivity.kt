@@ -1,4 +1,4 @@
-package com.naufal.tugas_proyek_pmob.activities
+package com.naufal.tugas_proyek_pmob.ui.activity
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,6 @@ import com.naufal.tugas_proyek_pmob.adapters.LowonganAdapter
 import com.naufal.tugas_proyek_pmob.databinding.ActivityLowonganBinding
 import com.naufal.tugas_proyek_pmob.models.Lowongan
 import java.util.Locale
-import android.content.Intent
 
 class LowonganActivity : AppCompatActivity() {
 
@@ -23,18 +22,14 @@ class LowonganActivity : AppCompatActivity() {
         binding = ActivityLowonganBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup RecyclerView
         setupRecyclerView()
 
-        // Muat data dummy untuk ditampilkan
         loadDummyData()
 
-        // Setup listener untuk search dan tombol kembali
         setupListeners()
     }
 
     private fun setupRecyclerView() {
-        // Inisialisasi adapter dengan list kosong terlebih dahulu
         lowonganAdapter = LowonganAdapter(ArrayList())
         binding.recyclerViewLowongan.apply {
             layoutManager = LinearLayoutManager(this@LowonganActivity)
@@ -43,7 +38,6 @@ class LowonganActivity : AppCompatActivity() {
     }
 
     private fun loadDummyData() {
-        // Ini adalah data contoh, nantinya bisa Anda ambil dari API atau database
         allLowonganList.add(Lowongan("1", "UI/UX Designer", "Gojek", "Jakarta, Indonesia", R.drawable.logo_job))
         allLowonganList.add(Lowongan("2", "Android Developer", "Tokopedia", "Jakarta, Indonesia", R.drawable.logo_job))
         allLowonganList.add(Lowongan("3", "Web Developer", "Traveloka", "Surabaya, Indonesia", R.drawable.logo_job))
@@ -52,17 +46,14 @@ class LowonganActivity : AppCompatActivity() {
         allLowonganList.add(Lowongan("6", "Quality Assurance", "Gojek", "Surabaya, Indonesia", R.drawable.logo_job))
         allLowonganList.add(Lowongan("7", "iOS Developer", "Blibli", "Jakarta, Indonesia", R.drawable.logo_job))
 
-        // Tampilkan semua data saat pertama kali dibuka
         lowonganAdapter.filterList(allLowonganList)
     }
 
     private fun setupListeners() {
-        // Tombol Kembali
         binding.btnBack.setOnClickListener {
             finish()
         }
 
-        // Fungsi Pencarian (SearchView)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -79,7 +70,6 @@ class LowonganActivity : AppCompatActivity() {
         val filteredList = ArrayList<Lowongan>()
         if (text != null) {
             for (item in allLowonganList) {
-                // Logika pencarian: cari berdasarkan judul atau nama perusahaan
                 if (item.judul.lowercase(Locale.ROOT).contains(text.lowercase(Locale.ROOT)) ||
                     item.namaPerusahaan.lowercase(Locale.ROOT).contains(text.lowercase(Locale.ROOT))) {
                     filteredList.add(item)
@@ -87,7 +77,6 @@ class LowonganActivity : AppCompatActivity() {
             }
         }
 
-        // Tampilkan atau sembunyikan pesan "Empty State"
         if (filteredList.isEmpty()) {
             binding.tvEmptyState.visibility = View.VISIBLE
             binding.recyclerViewLowongan.visibility = View.GONE
@@ -96,7 +85,6 @@ class LowonganActivity : AppCompatActivity() {
             binding.recyclerViewLowongan.visibility = View.VISIBLE
         }
 
-        // Perbarui data di adapter
         lowonganAdapter.filterList(filteredList)
     }
 }
