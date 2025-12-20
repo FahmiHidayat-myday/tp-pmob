@@ -5,28 +5,34 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.naufal.tugas_proyek_pmob.databinding.DaftarPekerjaanBinding // Perhatikan nama kelas binding ini
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.naufal.tugas_proyek_pmob.databinding.DaftarPekerjaanBinding
+import java.util.Date
 
 class DaftarPekerjaanActivity : AppCompatActivity() {
 
-    // Deklarasikan variabel untuk view binding
-    // Nama kelas 'DaftarPekerjaanBinding' dibuat dari nama file 'daftar_pekerjaan.xml'
     private lateinit var binding: DaftarPekerjaanBinding
-
-    // Variabel untuk menyimpan URI dari file yang dipilih
     private var selectedFileUri: Uri? = null
 
-    // Gunakan ActivityResultLauncher untuk menangani hasil dari pemilih file
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+
+    // Variabel untuk menampung detail pekerjaan
+    private var jobTitle: String? = null
+    private var companyName: String? = null
+
     private val filePickerLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let { uri ->
+            result.data?.data?.let {
+                uri ->
                 selectedFileUri = uri
-                // Tampilkan nama file yang dipilih di UI
                 binding.tvUploadCV.text = getFileName(uri)
             }
         }
@@ -34,55 +40,82 @@ class DaftarPekerjaanActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inisialisasi binding dan atur layout
         binding = DaftarPekerjaanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Panggil fungsi untuk mengatur semua aksi klik
-        setupClickListeners()
+        // Inisialisasi Firebase
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
-        // Muat data pekerjaan yang dilamar (dari Intent)
+        setupClickListeners()
         loadJobDetails()
     }
 
     private fun setupClickListeners() {
-
-        // 1. Tombol Kembali di Header
         binding.btnBack.setOnClickListener {
-            finish() // Menutup activity
+            finish()
         }
 
-        // 2. Tombol "Unggah Dokumen"
         binding.btnUploadCV.setOnClickListener {
             openFilePicker()
         }
 
-        // 3. Tombol "Kirim Lamaran"
         binding.btnKirimLamaran.setOnClickListener {
             if (validateInput()) {
-                // Lakukan proses pengiriman data ke server/API
-                // ... (logika upload file dan data) ...
-
-                // Tampilkan pesan sukses dan kembali ke halaman sebelumnya
-                Toast.makeText(this, "Lamaran berhasil dikirim!", Toast.LENGTH_LONG).show()
-                finish()
+                submitApplication()
             }
         }
     }
 
+    private fun submitApplication() {
+        val fullName = binding.etFullName.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        val cvFileName = selectedFileUri?.let { getFileName(it) } ?: "Tidak ada file"
+        val userId = auth.currentUser?.uid
+
+        if (userId == null) {
+            Toast.makeText(this, "Anda harus login untuk melamar.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // Membuat ID unik untuk setiap lamaran
+        val applicationId = database.reference.child("applications").push().key
+
+        if (applicationId == null) {
+            Toast.makeText(this, "Gagal membuat lamaran, coba lagi.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val applicationData = mapOf(
+            "userId" to userId,
+            "jobTitle" to jobTitle,
+            "companyName" to companyName,
+            "applicantName" to fullName,
+            "applicantEmail" to email,
+            "cvFileName" to cvFileName,
+            "status" to "Terkirim",
+            "timestamp" to Date().time
+        )
+
+        // Simpan ke database di bawah node userId
+        database.getReference("applications").child(userId).child(applicationId).setValue(applicationData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Lamaran berhasil dikirim!", Toast.LENGTH_LONG).show()
+                finish() // Kembali ke halaman detail
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal mengirim lamaran: ${it.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
     private fun openFilePicker() {
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            type = "/" // Izinkan semua jenis file
+            type = "*/*"
             addCategory(Intent.CATEGORY_OPENABLE)
-            // Anda bisa lebih spesifik dengan tipe MIME
-            // val mimeTypes = arrayOf("application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-            // putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
         }
         filePickerLauncher.launch(intent)
     }
 
-    // Fungsi helper untuk mendapatkan nama file dari URI
     private fun getFileName(uri: Uri): String {
         var fileName: String? = null
         contentResolver.query(uri, null, null, null, null)?.use { cursor ->
@@ -97,33 +130,28 @@ class DaftarPekerjaanActivity : AppCompatActivity() {
     }
 
     private fun validateInput(): Boolean {
-        val fullName = binding.etFullName.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
-
-        if (fullName.isEmpty()) {
+        if (binding.etFullName.text.toString().trim().isEmpty()) {
             binding.etFullName.error = "Nama lengkap tidak boleh kosong"
-            binding.etFullName.requestFocus()
             return false
         }
-
-        if (email.isEmpty()) {
+        if (binding.etEmail.text.toString().trim().isEmpty()) {
             binding.etEmail.error = "Email tidak boleh kosong"
-            binding.etEmail.requestFocus()
             return false
         }
-
         if (selectedFileUri == null) {
             Toast.makeText(this, "Silakan unggah CV Anda", Toast.LENGTH_SHORT).show()
             return false
         }
-
         return true
     }
 
     private fun loadJobDetails() {
-        // Muat detail pekerjaan dari intent yang dikirim oleh DetailLowonganActivity
-        // Contoh:
-        // val jobTitle = intent.getStringExtra("JOB_TITLE")
-        // binding.tvJobTitle.text = jobTitle
+        // Ambil data yang dikirim dari DetailLowonganActivity
+        jobTitle = intent.getStringExtra("EXTRA_JOB_TITLE")
+        companyName = intent.getStringExtra("EXTRA_COMPANY_NAME")
+
+        // Tampilkan di UI
+        binding.tvJobTitle.text = jobTitle
+        binding.tvCompanyName.text = companyName
     }
 }
