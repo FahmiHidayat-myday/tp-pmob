@@ -41,10 +41,14 @@ class EditProfileActivity : AppCompatActivity() {
                     val fullName = snapshot.child("fullName").getValue(String::class.java)
                     val phoneNumber = snapshot.child("phoneNumber").getValue(String::class.java)
                     val address = snapshot.child("address").getValue(String::class.java)
+                    val specialNeeds = snapshot.child("specialNeeds").getValue(String::class.java)
+                    val skills = snapshot.child("skills").getValue(String::class.java)
 
                     binding.etFullName.setText(fullName)
                     binding.etPhoneNumber.setText(phoneNumber)
                     binding.etAddress.setText(address)
+                    binding.etSpecialNeeds.setText(specialNeeds)
+                    binding.etSkills.setText(skills)
                 }
             }
 
@@ -58,17 +62,21 @@ class EditProfileActivity : AppCompatActivity() {
         val fullName = binding.etFullName.text.toString().trim()
         val phoneNumber = binding.etPhoneNumber.text.toString().trim()
         val address = binding.etAddress.text.toString().trim()
+        val specialNeeds = binding.etSpecialNeeds.text.toString().trim()
+        val skills = binding.etSkills.text.toString().trim()
         val userId = auth.currentUser?.uid ?: return
 
         if (fullName.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()) {
-            Toast.makeText(this, "Semua kolom harus diisi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Nama, No. HP, dan Alamat harus diisi", Toast.LENGTH_SHORT).show()
             return
         }
 
         val userUpdates = mapOf(
             "fullName" to fullName,
             "phoneNumber" to phoneNumber,
-            "address" to address
+            "address" to address,
+            "specialNeeds" to specialNeeds,
+            "skills" to skills
         )
 
         val userRef = database.getReference("users").child(userId)

@@ -48,13 +48,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Alamat"
+            android:minLines="2"
+            android:gravity="top" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSpecialNeeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kebutuhan Khusus (Contoh: Tuna Rungu)" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSkills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Keahlian (Pisahkan dengan koma)"
             android:minLines="3"
             android:gravity="top" />
     </com.google.android.material.textfield.TextInputLayout>

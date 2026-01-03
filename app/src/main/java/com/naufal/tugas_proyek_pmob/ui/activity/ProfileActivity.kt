@@ -49,7 +49,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun loadUserProfile() {
         val user = auth.currentUser
         if (user == null) {
-            // Jika tidak ada sesi, kembali ke halaman login
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
@@ -60,17 +59,19 @@ class ProfileActivity : AppCompatActivity() {
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    // Ambil semua data dari database
                     val fullName = snapshot.child("fullName").getValue(String::class.java)
                     val email = snapshot.child("email").getValue(String::class.java)
                     val phoneNumber = snapshot.child("phoneNumber").getValue(String::class.java)
                     val address = snapshot.child("address").getValue(String::class.java)
+                    val specialNeeds = snapshot.child("specialNeeds").getValue(String::class.java)
+                    val skills = snapshot.child("skills").getValue(String::class.java)
 
-                    // Tampilkan data ke UI, berikan nilai default jika null
                     binding.tvName.text = fullName ?: "Nama belum diatur"
                     binding.tvEmail.text = email ?: "Email tidak tersedia"
                     binding.tvPhoneNumber.text = phoneNumber ?: "No. HP belum diatur"
                     binding.tvAddress.text = address ?: "Alamat belum diatur"
+                    binding.tvSpecialNeeds.text = specialNeeds ?: "Belum diatur"
+                    binding.tvSkills.text = skills?.replace(",", "\n• ")?.let { "• $it" } ?: "Belum diatur"
 
                 } else {
                     // Fallback jika data pengguna belum ada
@@ -78,6 +79,8 @@ class ProfileActivity : AppCompatActivity() {
                     binding.tvEmail.text = user.email
                     binding.tvPhoneNumber.text = "-"
                     binding.tvAddress.text = "-"
+                    binding.tvSpecialNeeds.text = "-"
+                    binding.tvSkills.text = "-"
                 }
             }
 
