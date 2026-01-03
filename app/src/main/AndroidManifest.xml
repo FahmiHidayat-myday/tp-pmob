@@ -50,6 +50,9 @@
             android:name=".ui.activity.ProfileMenuActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.DetailLowonganActivity"
             android:exported="false"
             android:label="Detail Lowongan" />

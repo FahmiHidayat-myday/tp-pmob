@@ -23,7 +23,6 @@ class ProfileMenuActivity : AppCompatActivity() {
         binding = ProfileMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inisialisasi Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
@@ -31,9 +30,20 @@ class ProfileMenuActivity : AppCompatActivity() {
         loadUserData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Muat ulang data setiap kali kembali ke activity ini untuk menampilkan perubahan
+        loadUserData()
+    }
+
     private fun setupClickListeners() {
         binding.header.setOnClickListener {
             finish()
+        }
+
+        // Listener untuk tombol Edit Profil
+        binding.menuEditProfile.setOnClickListener {
+            startActivity(Intent(this, EditProfileActivity::class.java))
         }
 
         binding.menuMyProfile.setOnClickListener {
@@ -47,27 +57,18 @@ class ProfileMenuActivity : AppCompatActivity() {
     }
 
     private fun loadUserData() {
-        val user = auth.currentUser
-        if (user == null) {
-            // Jika tidak ada sesi, kembali ke halaman login
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            return
-        }
+        val user = auth.currentUser ?: return
 
-        // Ambil data dari Firebase Realtime Database
         val userRef = database.getReference("users").child(user.uid)
         userRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    val fullName = snapshot.child("fullName").getValue(String::class.java)
                     val email = snapshot.child("email").getValue(String::class.java)
-                    // Tampilkan data ke UI
-                    binding.tvName.text = email // Sementara nama ditampilkan sebagai email
+
+                    binding.tvName.text = fullName ?: email // Tampilkan nama lengkap, atau email jika nama kosong
                     binding.tvEmail.text = email
                 } else {
-                    // Fallback jika data tidak ada di database
-                    binding.tvName.text = "Pengguna"
                     binding.tvEmail.text = user.email
                 }
             }
@@ -82,10 +83,8 @@ class ProfileMenuActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Konfirmasi Log Out")
             .setMessage("Apakah Anda yakin ingin keluar dari akun Anda?")
-            .setPositiveButton("Ya, Log Out") { dialog, which ->
-                // Hapus sesi login
+            .setPositiveButton("Ya, Log Out") { _, _ ->
                 auth.signOut()
-                // Kembali ke alur awal
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

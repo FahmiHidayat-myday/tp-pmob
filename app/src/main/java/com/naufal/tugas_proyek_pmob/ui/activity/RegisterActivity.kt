@@ -57,23 +57,23 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    // Simpan data pengguna ke Firebase Realtime Database
                     val userMap = mapOf("email" to email)
 
                     user?.let {
                         database.getReference("users").child(it.uid).setValue(userMap)
                             .addOnSuccessListener {
                                 showLoading(false)
-                                Toast.makeText(this, "Pendaftaran berhasil! Anda otomatis login.", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, "Pendaftaran berhasil! Silakan login.", Toast.LENGTH_LONG).show()
 
-                                val intent = Intent(this, HomeActivity::class.java)
+                                // Arahkan kembali ke halaman Login
+                                val intent = Intent(this, LoginActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                                 finish()
                             }
-                            .addOnFailureListener {
+                            .addOnFailureListener { e ->
                                 showLoading(false)
-                                Toast.makeText(this, "Gagal menyimpan data pengguna.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Gagal menyimpan data: ${e.message}", Toast.LENGTH_SHORT).show()
                             }
                     }
 

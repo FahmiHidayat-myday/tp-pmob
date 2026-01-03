@@ -24,11 +24,15 @@ class ProfileActivity : AppCompatActivity() {
         binding = ProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inisialisasi Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
         setupClickListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Muat ulang data setiap kali kembali ke halaman ini
         loadUserProfile()
     }
 
@@ -45,27 +49,35 @@ class ProfileActivity : AppCompatActivity() {
     private fun loadUserProfile() {
         val user = auth.currentUser
         if (user == null) {
-            // Jika tidak ada user yang login, kembali ke halaman login
-            Toast.makeText(this, "Sesi berakhir, silakan login kembali.", Toast.LENGTH_SHORT).show()
+            // Jika tidak ada sesi, kembali ke halaman login
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             return
         }
 
-        // Ambil data dari Firebase Realtime Database
         val userRef = database.getReference("users").child(user.uid)
-        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    // Ambil semua data dari database
+                    val fullName = snapshot.child("fullName").getValue(String::class.java)
                     val email = snapshot.child("email").getValue(String::class.java)
+                    val phoneNumber = snapshot.child("phoneNumber").getValue(String::class.java)
+                    val address = snapshot.child("address").getValue(String::class.java)
 
-                    // Tampilkan data ke UI
-                    // Asumsi dari layout `profile.xml`, ID TextView adalah tvName dan tvEmail
-                    binding.tvName.text = email // Sementara nama menggunakan email
-                    binding.tvEmail.text = email
+                    // Tampilkan data ke UI, berikan nilai default jika null
+                    binding.tvName.text = fullName ?: "Nama belum diatur"
+                    binding.tvEmail.text = email ?: "Email tidak tersedia"
+                    binding.tvPhoneNumber.text = phoneNumber ?: "No. HP belum diatur"
+                    binding.tvAddress.text = address ?: "Alamat belum diatur"
+
                 } else {
-                    Toast.makeText(this@ProfileActivity, "Data pengguna tidak ditemukan.", Toast.LENGTH_SHORT).show()
+                    // Fallback jika data pengguna belum ada
+                    binding.tvName.text = "Pengguna Baru"
+                    binding.tvEmail.text = user.email
+                    binding.tvPhoneNumber.text = "-"
+                    binding.tvAddress.text = "-"
                 }
             }
 
@@ -79,7 +91,7 @@ class ProfileActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Konfirmasi Log Out")
             .setMessage("Apakah Anda yakin ingin keluar dari akun Anda?")
-            .setPositiveButton("Ya, Log Out") { dialog, which ->
+            .setPositiveButton("Ya, Log Out") { _, _ ->
                 auth.signOut()
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
